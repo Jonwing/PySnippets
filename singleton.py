@@ -50,9 +50,10 @@ class Singleton1(type):
     _instance = {}
 
     def __call__(cls, *args, **kwargs):
-        if cls not in cls._instance:
-            cls._instance[cls] = super(Singleton1, cls).__call__(*args, **kwargs)
-        return cls._instance[cls]
+        meta = cls.__class__
+        if cls not in meta._instance:
+            meta._instance[cls] = super(Singleton1, cls).__call__(*args, **kwargs)
+        return meta._instance[cls]
 
 
 class MyClass2(object):
